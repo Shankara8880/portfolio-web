@@ -1,0 +1,7 @@
+export { default as About } from './About'
+export { default as Home } from './Home'
+export { default as Contact } from './Contact'
+export { default as Projects } from './Projects'
+export { default as Certificates } from './Certificates'
+export { default as SingleCertificateInfo } from './SingleCertificateInfo'
+export { default as SingleProjectInfo } from './SingleProjectInfo'
