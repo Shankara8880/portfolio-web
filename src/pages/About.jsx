@@ -43,7 +43,7 @@ const About = () => {
                 <Typography variant='h3'>
                     <Avatar
                         alt="Shankar Bevale"
-                        src="src/documents/profile.jpg"
+                        src="src/documents/profile.jpg" 
                         sx={{ width: 250, height: 250, margin: "1rem" }}
                     />
                     <PrintText text={text} />
