@@ -28,7 +28,7 @@ const Projects = () => {
             id: 3,
             name: "QR Code Genrator",
             desc: "Tech stack : HTML,Bootstrap,React.js ",
-            url: "https://github.com/Shankara8880/QR-generstor",
+            url: "https://text-to-qr-codes-generator.netlify.app",
             moreTo: "single-project"
         },
         {
