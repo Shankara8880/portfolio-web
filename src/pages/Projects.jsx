@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/system';
-import { Container, Grid, LinearProgress } from '@mui/material';
+import { Grid, LinearProgress } from '@mui/material';
 import { Link } from 'react-router-dom'
 
 const Projects = () => {
@@ -39,30 +39,26 @@ const Projects = () => {
             moreTo: "single-project"
         },
     ]
-    return <Box>
-        <Container maxWidth="lg">
-            <Grid container spacing={0}>
+    return  <Grid container style={{marginBottom:100,marginTop:10}} >
                 {
-                    projects.map(item => <Grid item xs={6}>
-                        <Card sx={{ maxWidth: "x1", margin: 4 }} >
+                    projects.map(item => <Grid item sm={6} xs={12} style={{padding:10}}>
+                        <Card  >
                             <CardContent>
-                                {/* <Alert variant="filled" severity="info">
-                                This is a success alert — check it out!
-                            </Alert> */}
                                 <Typography style={{ backgroundColor: 'rgb(56 140 201)', padding: "2rem", color: "white" }} gutterBottom height="140" severity="info" variant="h5" component="div">
                                     {item.name}
                                 </Typography>
                                 <LinearProgress color="info" />
-                                <Typography variant="body2" color="text.secondary">
-                                    {item.desc}
+                                <Typography variant="body2" color="text.secondary" style={{marginTop:10,paddingRight:"2rem"}}>
+                                    <p>{item.desc}</p>
                                 </Typography>
                             </CardContent>
-                            <CardActions>
-                                <Button size="small">
-                                    <Link style={{ textDecoration: "none" }} to={item.url}>View Project</Link>
+                            <CardActions style={{display:"flex",justifyContent:"space-between",padding:"1rem"}}>
+                                <Button onClick={()=>window.open(item.url, "_blank")} size="small" variant="outlined" style={{marginRight:5}}>
+                                    View Project
                                 </Button>
-                                <Link to={`/projects/${item.moreTo}/${item.id}`}>
-                                    <Button size="small">
+                                {/* <Link to={`/projects/${item.moreTo}/${item.id}`}> */}
+                                <Link to={`/projects/single-project/${item.id}`}>
+                                    <Button size="small" variant="outlined">
                                         See in Detail...
                                     </Button>
                                 </Link>
@@ -71,8 +67,6 @@ const Projects = () => {
                     </Grid>)
                 }
             </Grid>
-        </Container>
-    </Box>
 }
 
 export default Projects

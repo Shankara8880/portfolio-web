@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from "framer-motion";
-import { Avatar, Box, Card, Container, Typography } from '@mui/material';
+import { Avatar, Box, Card, Container, Grid, Typography } from '@mui/material';
+import { useMediaQuery, useTheme } from '@material-ui/core';
 // import { Avatar, Typography } from '';
 
 const About = () => {
@@ -37,33 +38,41 @@ const About = () => {
     //     }, 100);
     //     return () => clearInterval(timer);
     // }, []);
-    return <Container Container maxWidth="lg">
-        <Box component="center">
-            <Card sx={{ maxWidth: "x1", margin: 4 }}>
-                <Typography variant='h3'>
+    const theme = useTheme();
+    const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+    return <Grid container >
+        <Grid style={{padding:10}}>
+            <Card style={{padding:12,display:"flex",flexDirection:"column",alignItems:"center"}}>
+                <Typography variant={isSmallScreen ? "h6":'h3'} >
+                    <div style={{display:"flex",justifyContent:"center"}}>
                     <Avatar
-                        alt="Shankar Bevale"
-                        src="src/documents/profile.jpg" 
-                        sx={{ width: 250, height: 250, margin: "1rem" }}
-                    />
+                        alt="SB"
+                        src="src/documents/profile.jpg"
+                        sx={{
+                            width: isSmallScreen ? 150 : 250, 
+                            height: isSmallScreen ? 150 : 250,
+                            margin: "1rem"
+                        }}
+                        />
+                    </div>
                     <PrintText text={text} />
                 </Typography>
-                <Typography variant='h4' sx={{ margin: "1rem" }}>
+                <Typography variant={isSmallScreen ? "h7":'h4'} sx={{ margin: "1rem" }}>
                     Name : Shankar Bevale
                 </Typography>
                 {/* <Typography variant='h4' sx={{ margin: "1rem" }}>
                     Skills
 
                 </Typography> */}
-                <Typography variant='h5' sx={{ marginTop: "4rem" }}>
-                    I am a B.Tech Computer Science student at MGM's Jawaharlal Nehru
+                <Typography variant={isSmallScreen ? "h8":'h5'} >
+                    <p>I am a B.Tech Computer Science student at MGM's Jawaharlal Nehru
                     Engineering College, Aurangabad. I have a keen interest in learning new
                     technologies and utilizing my skills to solve real-life problems and
-                    contribute towards the growth of the particular organization.
+                    contribute towards the growth of the particular organization.</p>
                 </Typography>
             </Card>
-        </Box>
+        </Grid>
 
-    </Container>
+    </Grid>
 }
 export default About

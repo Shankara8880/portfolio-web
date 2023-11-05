@@ -1,5 +1,4 @@
 import React from 'react'
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -12,24 +11,43 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useAddContactMutation } from '../api/apiSlice';
+import { Alert } from '@mui/material';
 
 const Contact = () => {
     const [addContact] = useAddContactMutation()
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            name: data.get('name'),
-            email: data.get('email'),
-            message: data.get('message'),
-            subject: data.get('subject'),
-        });
-        addContact({
-            name: data.get('name'),
-            email: data.get('email'),
-            message: data.get('message'),
-            subject: data.get('subject'),
-        })
+           try {
+            const data = new FormData(event.currentTarget);
+            console.log({
+                name: data.get('name'),
+                email: data.get('email'),
+                message: data.get('message'),
+                subject: data.get('subject'),
+            });
+
+            const response = await addContact({
+                name: data.get('name'),
+                email: data.get('email'),
+                message: data.get('message'),
+                subject: data.get('subject'),
+                }); // Trigger the mutation and send the data to the backend
+                console.log('Response from the backend:', response);
+                if (response?.data?.status == 200) {
+                    alert(response?.data?.message || "Email Sent Successfully!");
+                    <Alert severity="success">
+                        {"Email Sent Successfully!"} 
+                    </Alert>
+                }else{
+                    alert(response?.data?.message || "Something Went Wrong!");
+                    <Alert severity="error">
+                        {response?.data?.message || "Something Went Wrong!"}
+                    </Alert>
+                }
+                // Handle the response as needed
+            } catch (err) {
+                console.error('An error occurred:', err);
+            }
     };
     return <>
         <Box
@@ -39,6 +57,7 @@ const Contact = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
+                marginBottom:10
             }}
         >
             <Typography component="h1" variant="h4">

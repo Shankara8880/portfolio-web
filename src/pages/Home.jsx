@@ -1,9 +1,15 @@
 import React from 'react'
+import About from './About'
+import Projects from './Projects'
+import Certificates from './Certificates'
+import Contact from './Contact'
 
 const Home = () => {
     return <>
-        <h1>All</h1>
-        <div>Home</div>
+        <About/>
+        <Projects/>
+        <Certificates/>
+        <Contact/>
     </>
 }
 

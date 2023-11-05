@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Container from '@mui/material/Container'
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,11 +31,14 @@ const useStyles = makeStyles({
 
 
 const SingleProjectInfo = () => {
+
     const Demo = styled('div')(({ theme }) => ({
         backgroundColor: theme.palette.background.paper,
     }));
     const classes = useStyles();
     const { id } = useParams()
+    const [projectItem, setProjectItem] = useState({})
+
     const singleProject = [
         {
             id: 1,
@@ -72,25 +75,40 @@ const SingleProjectInfo = () => {
             images: [""]
         },
     ]
+    const getSingleProjectObj=()=>{
+        let data= singleProject.find(item=>item.id == id)
+        console.log("data",data);
+        setProjectItem(data)
+    }
+    useEffect(() => {
+      getSingleProjectObj()
+    }, [id])
+
+    useEffect(() => {
+      
+    }, [])
+    
+    
+
     return <>
-        <Container maxWidth="lg">
+        <Container >
             {
-                singleProject.map(single => single.id == id && <Card className={classes.card}>
+                projectItem && <Card >
                     <div>
                         <CardMedia
                             className={classes.media}
                             // image={single.images[0]}
-                            title={single.name}
+                            title={projectItem.name}
                         />
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
-                                Project Name:  {single.name}
+                                Project Name:  {projectItem.name}
                             </Typography>
                             <Typography variant="body2" color="error" component="p">
-                                Problem Statement: {single.problemStatement}
+                                Problem Statement: {projectItem.problemStatement}
                             </Typography>
                             <Typography variant="body2" color="primary" component="p">
-                                Solution for project {single.solution}
+                                Solution for project {projectItem.solution}
                             </Typography>
                             <Grid item xs={12} md={6}>
                                 <Typography sx={{ mt: 4, mb: 2 }} variant="body2" component="p">
@@ -99,7 +117,7 @@ const SingleProjectInfo = () => {
                                 <>
                                     <List dense={true}>
                                         {
-                                            single.techStack.map(item => <ListItem>
+                                            projectItem?.techStack?.map(item => <ListItem>
                                                 <DoubleArrowRoundedIcon />
                                                 <ListItemText
                                                     primary={item}
@@ -120,7 +138,7 @@ const SingleProjectInfo = () => {
                                     <List dense={true}>
                                         <ListItem>
                                             <ListItemText
-                                                primary="Single-line item"
+                                                primary="single-line item"
                                             // secondary={secondary ? 'Secondary text' : null}
                                             />
                                         </ListItem>
@@ -128,12 +146,12 @@ const SingleProjectInfo = () => {
                                 </Demo>
                             </Grid>
                             Link OF Project :
-                            <Link href={single.url} target="_blank" rel="noopener">
+                            <Link href={projectItem.url} target="_blank" rel="noopener">
                                 View project
                             </Link>
                         </CardContent>
                     </div>
-                </Card>)
+                </Card>
             }
         </Container>
     </>
