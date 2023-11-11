@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -39,15 +39,16 @@ const Projects = () => {
             moreTo: "single-project"
         },
     ]
+        const [hoverItem, setHoverItem] = useState()
     return  <Grid container style={{marginBottom:100,marginTop:10}} >
                 {
                     projects.map(item => <Grid item sm={6} xs={12} style={{padding:10}}>
-                        <Card  >
+                        <Card onMouseMove={()=>setHoverItem(item.id)} >
                             <CardContent>
                                 <Typography style={{ backgroundColor: 'rgb(56 140 201)', padding: "2rem", color: "white" }} gutterBottom height="140" severity="info" variant="h5" component="div">
                                     {item.name}
                                 </Typography>
-                                <LinearProgress color="info" />
+                                {(hoverItem == item.id) && <LinearProgress color="info" />}
                                 <Typography variant="body2" color="text.secondary" style={{marginTop:10,paddingRight:"2rem"}}>
                                     <p>{item.desc}</p>
                                 </Typography>
