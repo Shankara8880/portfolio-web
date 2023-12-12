@@ -47,7 +47,8 @@ const About = () => {
                     <div style={{display:"flex",justifyContent:"center"}}>
                     <Avatar
                         alt="SB"
-                        src="src/documents/profile.jpg"
+                        // src="src/documents/profile.jpg"
+                        src="https://i.ibb.co/1nbrb1W/Shankar-profile.jpg"
                         sx={{
                             width: isSmallScreen ? 150 : 250, 
                             height: isSmallScreen ? 150 : 250,
